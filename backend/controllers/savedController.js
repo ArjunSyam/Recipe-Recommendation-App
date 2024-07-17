@@ -1,11 +1,14 @@
 const asyncHandler = require("express-async-handler");
 const Saved_Recipes = require("../models/savedModel");
+const Recipes = require("../models/recipesModel");
 
 //@desc Get all recipes
 //@route GET /api/recipes
 //@acess private 
 const getRecipes = asyncHandler(async (req, res) => {
-    const recipes = await Saved_Recipes.find({user_id: req.user.id});
+    const recipe_ids = await Saved_Recipes.find({user_id: req.user.id}).select('recipe_id');
+    const recipes = await Promise.all(recipe_ids.map((id) => Recipes.findOne({recipe_id: id.recipe_id})));
+
     res.status(200).json(recipes);
 });
 
@@ -13,12 +16,16 @@ const getRecipes = asyncHandler(async (req, res) => {
 //@route GET /api/recipes/:id
 //@acess private 
 const getRecipe = asyncHandler(async (req, res) => {
-    const recipe = await Saved_Recipes.findById(req.params.id);
+    const recipe_id = await Saved_Recipes.findById(req.params.id);
+    console.log(recipe_id);
 
-    if(!recipe){
+    if(!recipe_id){
         res.status(404);
         throw new Error("Recipe not found");
     }
+
+    const recipe = await Recipes.findOne({recipe_id: recipe_id['recipe_id']});
+
     res.status(200).json(recipe);
 });
 
@@ -32,6 +39,12 @@ const addRecipe = asyncHandler(async (req, res) => {
     if(!recipe_id){
         res.status(400);
         throw new Error("No Recipe ID !");
+    };
+
+    const check_recipe = await Recipes.findOne({recipe_id: recipe_id});
+    if(!check_recipe){
+        res.status(400);
+        throw new Error("Recipe not found");
     };
 
     const recipe = await Saved_Recipes.create({
@@ -50,7 +63,7 @@ const deleteRecipe = asyncHandler(async (req, res) => {
 
     if(!recipe){
         res.status(404);
-        throw new Error("Contact not found");
+        throw new Error("Recipe not found");
     }
 
     if(recipe.user_id.toString() !== req.user.id){
