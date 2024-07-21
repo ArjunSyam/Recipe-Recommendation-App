@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="User registration and login application"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>User Registration & Login</title>
+    <!--<style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #7b0cf2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        background-color: rgb(247, 12, 137);
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      input {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      .error {
+        color: red;
+        text-align: center;
+        margin-top: 10px;
+      }
+      .success {
+        color: green;
+        text-align: center;
+        margin-top: 10px;
+      }
+      .toggle {
+        text-align: center;
+        margin-top: 10px;
+      }
+      .toggle a {
+        color: #4CAF50;
+        text-decoration: none;
+      }
+      .toggle a:hover {
+        text-decoration: underline;
+      }
+    </style>-->
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <div class="container" id="registerContainer">
+        <h2>APP NAME the one we don't have yet</h2>
+        <form id="registerForm">
+          <input type="text" id="regUsername" placeholder="Username" required>
+          <input type="email" id="regEmail" placeholder="Email" required>
+          <input type="password" id="regPassword" placeholder="Password" required>
+          <button type="submit">Register</button>
+        </form>
+        <p id="regMessage" class="success"></p>
+        <p class="toggle">Already have an account? <a href="#" id="showLogin">Login</a></p>
+      </div>
+
+      <div class="container" id="loginContainer" style="display:none;">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <input type="email" id="loginEmail" placeholder="Email" required>
+          <input type="password" id="loginPassword" placeholder="Password" required>
+          <button type="submit">Login</button>
+        </form>
+        <p id="loginMessage" class="error"></p>
+        <p class="toggle">Don't have an account? <a href="#" id="showRegister">Register</a></p>
+      </div>
+    </div>
+
+    <script>
+      // Toggle between registration and login forms
+      document.getElementById('showLogin').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('registerContainer').style.display = 'none';
+        document.getElementById('loginContainer').style.display = 'block';
+      });
+
+      document.getElementById('showRegister').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('registerContainer').style.display = 'block';
+      });
+
+      // Registration form handling
+      document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        var username = document.getElementById('regUsername').value;
+        var email = document.getElementById('regEmail').value;
+        var password = document.getElementById('regPassword').value;
+        var message = document.getElementById('regMessage');
+
+        // Simple validation
+        if (username && email && password) {
+          // Save to localStorage
+          localStorage.setItem('user', JSON.stringify({username, email, password}));
+          message.textContent = 'Registration successful! You can now login.';
+          message.className = 'success';
+          
+          // Clear the form
+          document.getElementById('registerForm').reset();
+        } else {
+          message.textContent = 'Please fill in all fields.';
+          message.className = 'error';
+        }
+      });
+
+      // Login form handling
+      document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        var email = document.getElementById('loginEmail').value;
+        var password = document.getElementById('loginPassword').value;
+        var message = document.getElementById('loginMessage');
+
+        // Retrieve user data from localStorage
+        var userData = JSON.parse(localStorage.getItem('user'));
+
+        // Check if user exists and credentials match
+        if (userData && userData.email === email && userData.password === password) {
+          message.textContent = 'Login successful!';
+          message.className = 'success';
+          // Here you would typically redirect to a dashboard or home page
+        } else {
+          message.textContent = 'Invalid email or password';
+          message.className = 'error';
+        }
+      });
+
+      // React app loading check (if needed)
+      function onReactLoaded() {
+        console.log('React app has finished loading!');
+        // You can add any necessary logic here
+      }
+
+      // Check if the React app has finished loading every 100ms
+      const checkReactLoaded = setInterval(() => {
+        const rootContent = document.getElementById('root').innerHTML;
+        if (!rootContent.includes('Register') && !rootContent.includes('Login')) {
+          clearInterval(checkReactLoaded);
+          onReactLoaded();
+        }
+      }, 100);
+    </script>
+  </body>
+</html>
