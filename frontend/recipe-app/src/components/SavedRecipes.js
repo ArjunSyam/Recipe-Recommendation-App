@@ -22,6 +22,7 @@ const Welcome = () =>{
                 } else{
                     console.log(response.data);
                     setSavedRecipes(response.data);
+                    console.log("recipes: ",savedRecipes);
                 }
                 
             }catch(error){

@@ -37,20 +37,22 @@ const addRecipe = asyncHandler(async (req, res) => {
 
     const {recipe_id} = req.body;
     if(!recipe_id){
-        res.status(400);
-        throw new Error("No Recipe ID !");
+        return res.status(400).json({ error: "No Recipe ID !" });
     };
 
     const check_recipe = await Recipes.findOne({recipe_id: recipe_id});
     if(!check_recipe){
-        res.status(400);
-        throw new Error("Recipe not found");
+        return res.status(400).json({ error: "Recipe not found!" });
     };
 
-    const recipe = await Saved_Recipes.create({
-        recipe_id,
-        user_id: req.user.id
-    });
+    let recipe = await Saved_Recipes.findOne({recipe_id: recipe_id});
+    if(!recipe)
+    {
+        recipe = await Saved_Recipes.create({
+            recipe_id,
+            user_id: req.user.id
+        });
+    };
 
     res.status(201).json({recipe});
 });

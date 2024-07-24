@@ -50,6 +50,12 @@ function Home(){
                 </h1>
             </div>
 
+            <div className='row mt-2 justify-content-center'>
+                <div className='col-md-4 text-center'>
+                    <Link to="/FindRecipe" className="btn btn-primary">Find Recipe</Link>
+                </div>
+            </div>
+
         </div>
 
     );

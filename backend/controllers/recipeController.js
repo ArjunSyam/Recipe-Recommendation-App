@@ -6,37 +6,30 @@ const Recipes = require("../models/recipesModel");
 //@acess private 
 const recipePrompt = asyncHandler(async (req, res) => {
     console.log("The request body is: ",req.body);
-
+    let and_objects = []
     const {cuisine,diet,ingredients} = req.body;
-    if((!cuisine)||(!diet)||(!ingredients)){
-        res.status(400);
-        throw new Error("Enter All the information!");
-    };
 
     //@desc function to generate a recipe based on the given prompts
 
-    const query = {$and:[{cuisine:"Indian"},{diet:/vegetarian/i},{$and:ingredients.map(ingredient=>({ingredients:{$regex:new RegExp(ingredient,"i")}}))}]};
+    if(cuisine != "")
+    {
+        and_objects.push({cuisine:cuisine})
+    }
+
+    if(diet != "")
+    {
+        and_objects.push({diet:diet})
+    }
+
+    if(ingredients != [])
+    {
+        and_objects.push({$and:ingredients.map(ingredient=>({ingredients:{$regex:new RegExp(ingredient,"i")}}))})
+    }
+
+    const query = {$and:and_objects};
     const possibleRecipes = await Recipes.find(query);
-    let recipe;
 
-    if(possibleRecipes.length == 0)
-    {
-        res.status(400);
-        throw new Error("No recipes found");
-    }
-
-    else if(possibleRecipes.length == 1)
-    {
-        recipe = possibleRecipes[0]; 
-    }
-
-    else
-    {
-        const index = Math.floor(Math.random() * possibleRecipes.length);
-        recipe = possibleRecipes[index];
-    }
-
-    res.status(201).json({recipe});
+    res.status(201).json(possibleRecipes);
 });
 
 module.exports = recipePrompt;

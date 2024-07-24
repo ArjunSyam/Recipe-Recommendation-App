@@ -6,6 +6,7 @@ import Login from "./Login"
 import Register from "./Register"
 import Home from "./Home"
 import SavedRecipes from "./SavedRecipes"
+import FindRecipe from "./FindRecipe";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/SavedRecipes" element={<SavedRecipes />} />
+          <Route path="/FindRecipe" element={<FindRecipe />} />
         </Routes>
       </div>
     </Router>
