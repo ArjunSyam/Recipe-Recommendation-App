@@ -1,0 +1,88 @@
+@keyframes revealText {
+    0% {
+        width: 100%;
+    }
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes enterRotateBackground {
+    0% {
+        transform: translateX(-100%) rotate(-45deg);
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+#Welcome-body #Title-text h1 {
+    font-size: 150px;
+    color: white;
+    justify-content: center;
+    display: inline-block;
+    width: 100%;
+    min-height: 80vh;
+    position: relative;
+    overflow: hidden;
+}
+
+#Welcome-body #Title-text h1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffaf01;
+    animation: revealText 2s ease-in-out forwards;
+}
+
+#Welcome-body {
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    overflow: hidden;
+}
+
+#Welcome-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    height: 100%;
+    background-image: url("../images/pixelcut-export.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+    opacity: 0;
+    animation: enterRotateBackground 2s ease-out forwards;
+    animation-delay: 2s;
+    z-index: -1;
+}
+
+#Welcome-body.animate::before {
+    background-image: url("../images/pixelcut-export.png");
+}
+
+.btn {
+    color: white;
+}
+
+.btn:active {
+    border: none;
+}
+
+.btn:hover {
+    color: rgb(0, 0, 0);
+}
+
+strong {
+    font-size: 250px;
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './css/FindRecipe.css'
 
 function FindRecipe(){
     let [selectedRecipes, setSelectedRecipes] = useState([]);
@@ -198,76 +199,77 @@ function FindRecipe(){
 
     return (
         <div className='container mt-3'>
-            <div className='row mt-3 text-center'>
-                <h1>Lets Find you a Recipe</h1>
+            <div className='row mt-5 text-center'>
+
             </div>
 
             <div className='row mt-3'>
-                <div className='col-md-12'>
+                <div className='col-md-6' id="select-options">
+                    <div className='form-container'>
+                    <div className='input-box'>
+                    <header>Find a Recipe</header>
                     <form id="SelectRecipeForm" onSubmit={handleSubmit}>
-                        <div className="row justify-content-center mt-2">
-                            <div className="col-md-9">
-                                <select
-                                    id="cusineSelect"
-                                    className="form-control"
-                                    value = {selectedCuisine}
-                                    onChange={(e) => setSelectedCuisine(e.target.value)}
-                                >
+                        <div className="input-field">
+                            <select
+                                id="cusineSelect"
+                                className="input"
+                                value={selectedCuisine}
+                                onChange={(e) => setSelectedCuisine(e.target.value)}
+                                required
+                            >
                                 <option value="" disabled>Select a cuisine</option>
-                                {cuisines.map((cuisine,index) => (
+                                {cuisines.map((cuisine, index) => (
                                     <option key={index} value={cuisine}>{cuisine}</option>
                                 ))}
-                                </select>
-                            </div>
+                            </select>
                         </div>
 
-                        <div className="row justify-content-center mt-2">
-                            <div className="col-md-9">
-                                <Select
-                                    isMulti
-                                    id="ingredientSelect"
-                                    options = {ingredientOptions}
-                                    className="form-control"
-                                    onChange={(selectedOptions) => 
-                                        setSelectedIngredients(selectedOptions.map(option => option.value))
-                                    }
-                                    placeholder="Select ingredients"
-                                />
-                            </div>
+                        <div className="input-field">
+                            <Select
+                                isMulti
+                                id="ingredientSelect"
+                                options={ingredientOptions}
+                                onChange={(selectedOptions) => 
+                                    setSelectedIngredients(selectedOptions.map(option => option.value))
+                                }
+                                placeholder="Select ingredients"
+                                className="react-select-container"
+                                classNamePrefix="react-select"
+                            />
                         </div>
 
-                        <div className="row justify-content-center mt-2">
-                            <div className="col-md-9">
-                                <select
-                                    id="dietSelect"
-                                    className="form-control"
-                                    value = {selectedDiet}
-                                    onChange={(e) => setSelectedDiet(e.target.value)}
-                                >
+                        <div className="input-field">
+                            <select
+                                id="dietSelect"
+                                className="input"
+                                value={selectedDiet}
+                                onChange={(e) => setSelectedDiet(e.target.value)}
+                                required
+                            >
                                 <option value="" disabled>Select a diet</option>
-                                {diets.map((diet,index) => (
+                                {diets.map((diet, index) => (
                                     <option key={index} value={diet}>{diet}</option>
                                 ))}
-                                </select>
-                            </div>
+                            </select>
                         </div>
 
-                        
-                        <div className="row justify-content-center mt-3">
-                            <div className="col-md-9">
-                                <button type="submit" className="btn btn-primary w-100">FindRecipe</button>
-                            </div>
+                        <div className="input-field">
+                            <button type="submit" className="submit">Find Recipe</button>
                         </div>
                     </form>
                 </div>
+                    </div>
+                </div>
 
-                <div className='col-md-12'>
+                <div className='col-md-6'>
     
                     {isLoading ? (
                         <div className="spinner-border text-primary text-center justify-content-center" role="status" />
                     ) : randomRecipe != {} ?(
                         <div className='card'>
-                            <button className='btn btn-primary' onClick = {SaveRecipe}>SAVE</button>
+                            <button className='save-button' onClick = {SaveRecipe}>
+                                <img src="save.png" alt="Save Recipe" className="save-icon" />
+                            </button>
                             <div className="row justify-content-center mt-3">
                                 <img src={randomRecipe.image_url} alt={randomRecipe.name} className="img-fluid" />
                             </div>

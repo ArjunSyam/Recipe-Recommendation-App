@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './css/Home.css'
 
 function Home(){
     const [usercred, setUsercred] = useState('');
@@ -34,18 +35,18 @@ function Home(){
     return (
         <div className="home">
             <div className = "row mt-5">
-                <div className = "col-md-6 text-md-start">
+                <div className = "col-md-5 text-center" id="Saved-recipes">
                     <Link to="/SavedRecipes" className="text-primary">Saved Recipes</Link>
                 </div>
 
-                <div className = "col-md-6 text-md-end">
-                    <Link to="/login" className="text-primary">{usercred.username}</Link>
+                <div className = "col-md-6" id>
+                    <Link to="/" className="text-primary">logout</Link>
                 </div>
             </div>
 
             <div className = "row mt-2 justify-content-center">
-                <h1 className = "text-center">
-                    Welcome {usercred.username} what would you like
+                <h1 className = "Home-text">
+                    <strong className="first-word">W</strong>elcome {usercred.username} what would you like
                     to do today
                 </h1>
             </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './css/Login_Register.css'
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -34,7 +35,63 @@ function Login() {
     }
 
     return (
-        <div className="container text-center" id="loginContainer">
+        <div className="wrapper">
+            <div className="container main">
+                <div className = "row">
+                    <div class="col-md-6 side-image">
+                    </div>
+                </div>
+
+                <div className = "col-md-6 right">
+                    <div className= "input-box">
+                        <header>Login</header>
+
+                        <form onSubmit={handleSubmit}>
+                            <div class = "input-field">
+                                <input
+                                    type="text"
+                                    id="loginEmail"
+                                    className="input"
+                                    required
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
+
+                                <label for="email">Email</label>
+                            </div>
+
+                            <div class = "input-field">
+                                <input
+                                    type="password"
+                                    id="loginPassword"
+                                    className="input"
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+
+                                <label for="pass">Password</label>
+                            </div>
+
+                            <div class = "input-field">
+                                <button type="submit" className="submit">Login</button>
+                            </div>
+                        </form>
+
+                        <div className="error">
+                                {error && <p id="loginMessage" className="error text-danger">{error}</p>}
+                        </div>
+
+                        <div className="signin">
+                                <p className="toggle">Don't have an account? <Link to="/Register" className="text-primary">Register</Link></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        /*<div className="container" id="box">
+            <div className="container text-center" id="Login-Signup">
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <div className="row mt-4">
@@ -47,7 +104,7 @@ function Login() {
                         <div className="col">
                             <form id="loginForm" onSubmit={handleSubmit}>
                                 <div className="row justify-content-center mt-2">
-                                    <div className="col-md-9">
+                                    <div className="input-group">
                                         <input
                                             type="text"
                                             id="loginEmail"
@@ -61,7 +118,7 @@ function Login() {
                                 </div>
                                 
                                 <div className="row justify-content-center mt-2">
-                                    <div className="col-md-9">
+                                    <div className="input-group">
                                         <input
                                             type="password"
                                             id="loginPassword"
@@ -75,7 +132,7 @@ function Login() {
                                 </div>
                                 
                                 <div className="row justify-content-center mt-3">
-                                    <div className="col-md-9">
+                                    <div className="input-group">
                                         <button type="submit" className="btn btn-primary w-100">Login</button>
                                     </div>
                                 </div>
@@ -97,6 +154,8 @@ function Login() {
                 </div>
             </div>
         </div>
+        </div>*/
+
     );
 }
 

@@ -1,0 +1,48 @@
+#select-options {
+    background-color: white;
+    background: white;
+    border-radius: 5px;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card{
+    background-color: white;
+    background: white;
+    border-radius: 5px;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.save-button{
+    top: 30px;
+    left: 30px;
+    width: 35px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #000;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.save-icon{
+    width: 35px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.save-button:hover{
+    color: orangered;
+    transform: scale();
+}
+
+.save-button:focus{
+    outline: none;
+}
+

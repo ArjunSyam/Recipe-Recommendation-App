@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './css/Login_Register.css'
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -33,77 +34,64 @@ function Login() {
     }
 
     return (
-        <div className="container text-center" id="loginContainer">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <div className="row mt-4">
-                        <div className="col">
-                            <h2>Sign Up</h2>
-                        </div>
+        <div className="wrapper">
+            <div className="container main">
+                <div className="row">
+                    <div className="col-md-6 side-image">
                     </div>
-                    
-                    <div className='row mt-4'>
-                        <div className="col">
-                            <form id="loginForm" onSubmit={handleSubmit}>
-                                <div className="row justify-content-center mt-2">
-                                    <div className="col-md-9">
-                                        <input
-                                            type="text"
-                                            id="username"
-                                            className="form-control"
-                                            placeholder="username"
-                                            required
-                                            value={username}
-                                            onChange={(e) => setUsername(e.target.value)}
-                                        />
-                                    </div>
-                                </div>
+                </div>
 
-                                <div className="row justify-content-center mt-2">
-                                    <div className="col-md-9">
-                                        <input
-                                            type="text"
-                                            id="loginEmail"
-                                            className="form-control"
-                                            placeholder="Email"
-                                            required
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                        />
-                                    </div>
-                                </div>
-                                
-                                <div className="row justify-content-center mt-2">
-                                    <div className="col-md-9">
-                                        <input
-                                            type="password"
-                                            id="loginPassword"
-                                            className="form-control"
-                                            placeholder="Password"
-                                            required
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                        />
-                                    </div>
-                                </div>
-                                
-                                <div className="row justify-content-center mt-3">
-                                    <div className="col-md-9">
-                                        <button type="submit" className="btn btn-primary w-100">Sign Up</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    
-                    <div className='row mt-3'>
-                        <div className="col">
+                <div className="col-md-6 right">
+                    <div className="input-box">
+                        <header>Sign Up</header>
+
+                        <form onSubmit={handleSubmit}>
+                            <div className="input-field">
+                                <input
+                                    type="text"
+                                    id="username"
+                                    className="input"
+                                    required
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
+                                <label htmlFor="username">Username</label>
+                            </div>
+
+                            <div className="input-field">
+                                <input
+                                    type="text"
+                                    id="loginEmail"
+                                    className="input"
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                                <label htmlFor="email">Email</label>
+                            </div>
+
+                            <div className="input-field">
+                                <input
+                                    type="password"
+                                    id="loginPassword"
+                                    className="input"
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                <label htmlFor="pass">Password</label>
+                            </div>
+
+                            <div className="input-field">
+                                <button type="submit" className="submit">Sign Up</button>
+                            </div>
+                        </form>
+
+                        <div className="error">
                             {error && <p id="loginMessage" className="error text-danger">{error}</p>}
                         </div>
-                    </div>
-                    
-                    <div className='row mt-3'>
-                        <div className="col">
+
+                        <div className="signin">
                             <p className="toggle">Already have an account? <Link to="/Login" className="text-primary">Login</Link></p>
                         </div>
                     </div>
