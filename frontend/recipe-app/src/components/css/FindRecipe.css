@@ -8,19 +8,31 @@
     align-items: center;
 }
 
+.recipe-set {
+position: relative;
+width: 100%;
+border: none;
+justify-content: center;
+align-items: center;
+}
+
 .card{
     background-color: white;
     background: white;
     border-radius: 5px;
+    border:none;
+    margin: 0 auto;
     min-height: 80vh;
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
+    padding-top: 0%;
 }
 
 .save-button{
     top: 30px;
-    left: 30px;
+    right: 30px;
     width: 35px;
     background: none;
     border: none;
@@ -34,13 +46,83 @@
     width: 35px;
     position: absolute;
     top: 30px;
-    left: 30px;
+    right: 30px;
 }
 
-.save-button:hover{
-    color: orangered;
-    transform: scale();
+.card-img-top{
+    height: 300px;
+    border: none;
+    border-color: white;
 }
+
+.next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #000;
+    transition: color 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+}
+
+.prev-button {
+left: 0;
+}
+
+.next-button-right {
+right: 0;
+}
+
+.forward, .backward {
+width: 35px;
+}
+
+@media (max-width: 768px) {
+.next-button {
+    top: auto;
+    bottom: -50px;
+}
+
+.prev-button {
+    left: 30%;
+}
+
+.next-button-right {
+    right: 30%;
+}
+}
+
+.forward{
+    width: 35px;
+
+}
+
+.backward{
+    width: 35px;
+}
+
+
+.next-button:hover {
+    transform: translateY(10%) scale(1.1);
+}
+
+.next-button:focus {
+    outline: none;
+}
+
+
+.save-button:hover{
+    opacity: 0.5;
+}
+
+.save-button:active{
+    opacity: 1;
+}
+
+
 
 .save-button:focus{
     outline: none;

@@ -55,12 +55,12 @@ const registerUser = asyncHandler(async (req, res) => {
 
     const {username,email,password} = req.body;
     if(!username || !email || !password){
-        return res.status(400).json({ error: "All fields are mandatory !" });
+        return res.status(200).json({ error: "All fields are mandatory !" });
     };
 
     const userAvailable = await User.findOne({email});
     if(userAvailable){
-        return res.status(400).json({ error: "User already exists !" });
+        return res.status(200).json({ error: "User already exists !" });
     };
 
     //Hash password
@@ -76,9 +76,9 @@ const registerUser = asyncHandler(async (req, res) => {
 
     console.log(`user created ${user}`);
     if(user){
-        res.status(201).json({_id: user.id, email: user.email});
+        res.status(200).json({_id: user.id, email: user.email});
     }else {
-        return res.status(400).json({ error: "Invalid user data" });
+        return res.status(200).json({ error: "Invalid user data" });
     }
 
     res.json({message: "Register the user"});
@@ -91,12 +91,13 @@ const loginUser = asyncHandler(async (req, res) => {
     const {email, password} = req.body;
 
     if(!email || !password){
-        return res.status(400).json({ error: "Email and password are required!" });
+        return res.status(200).json({ error: "Email and password are required!" });
     };
 
     const user = await User.findOne({email});
     if(!user){
-        return res.status(400).json({ error: "user does not exist!" });
+        console.log("user does not exist!");
+        return res.status(200).json({ error: "user does not exist!" });
     };
 
     //compare password with hashed password
@@ -115,7 +116,8 @@ const loginUser = asyncHandler(async (req, res) => {
         );
         res.status(200).json({accessToken});
     }else{
-        return res.status(400).json({ error: "Password is incorrect!" });
+        console.log("Password is incorrect!");
+        return res.status(200).json({ error: "Password is incorrect!" });
     };
 
 });

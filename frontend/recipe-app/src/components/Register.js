@@ -13,7 +13,7 @@ function Login() {
         console.log(username,email,password)
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5001/api/users/login', 
+            const response = await axios.post('http://localhost:5001/api/users/register', 
                 {username,email, password },
                 {
                     headers: { 'Content-Type': 'application/json' },

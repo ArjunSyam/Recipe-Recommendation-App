@@ -27,7 +27,7 @@ function Login() {
                 console.log('Login Successful');
                 console.log(response.data.accessToken);
                 localStorage.setItem('token',response.data.accessToken)
-                window.location.href = '/Home';
+                window.location.href = '/SavedRecipes';
             }
         } catch (error) {
             setError(error.message);
@@ -38,7 +38,7 @@ function Login() {
         <div className="wrapper">
             <div className="container main">
                 <div className = "row">
-                    <div class="col-md-6 side-image">
+                    <div className="col-md-6 side-image">
                     </div>
                 </div>
 
@@ -47,7 +47,7 @@ function Login() {
                         <header>Login</header>
 
                         <form onSubmit={handleSubmit}>
-                            <div class = "input-field">
+                            <div className = "input-field">
                                 <input
                                     type="text"
                                     id="loginEmail"
@@ -57,10 +57,10 @@ function Login() {
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
 
-                                <label for="email">Email</label>
+                                <label htmlFor="email">Email</label>
                             </div>
 
-                            <div class = "input-field">
+                            <div className = "input-field">
                                 <input
                                     type="password"
                                     id="loginPassword"
@@ -70,10 +70,10 @@ function Login() {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
 
-                                <label for="pass">Password</label>
+                                <label htmlFor="pass">Password</label>
                             </div>
 
-                            <div class = "input-field">
+                            <div className = "input-field">
                                 <button type="submit" className="submit">Login</button>
                             </div>
                         </form>
@@ -89,72 +89,6 @@ function Login() {
                 </div>
             </div>
         </div>
-        
-        /*<div className="container" id="box">
-            <div className="container text-center" id="Login-Signup">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <div className="row mt-4">
-                        <div className="col">
-                            <h2>Login</h2>
-                        </div>
-                    </div>
-                    
-                    <div className='row mt-4'>
-                        <div className="col">
-                            <form id="loginForm" onSubmit={handleSubmit}>
-                                <div className="row justify-content-center mt-2">
-                                    <div className="input-group">
-                                        <input
-                                            type="text"
-                                            id="loginEmail"
-                                            className="form-control"
-                                            placeholder="Email"
-                                            required
-                                            value={username}
-                                            onChange={(e) => setUsername(e.target.value)}
-                                        />
-                                    </div>
-                                </div>
-                                
-                                <div className="row justify-content-center mt-2">
-                                    <div className="input-group">
-                                        <input
-                                            type="password"
-                                            id="loginPassword"
-                                            className="form-control"
-                                            placeholder="Password"
-                                            required
-                                            value={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                        />
-                                    </div>
-                                </div>
-                                
-                                <div className="row justify-content-center mt-3">
-                                    <div className="input-group">
-                                        <button type="submit" className="btn btn-primary w-100">Login</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    
-                    <div className='row mt-3'>
-                        <div className="col">
-                            {error && <p id="loginMessage" className="error text-danger">{error}</p>}
-                        </div>
-                    </div>
-                    
-                    <div className='row mt-1'>
-                        <div className="col">
-                            <p className="toggle">Don't have an account? <Link to="/Register" className="text-primary">Register</Link></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>*/
 
     );
 }

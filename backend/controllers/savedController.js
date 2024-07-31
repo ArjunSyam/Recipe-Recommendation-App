@@ -16,15 +16,12 @@ const getRecipes = asyncHandler(async (req, res) => {
 //@route GET /api/recipes/:id
 //@acess private 
 const getRecipe = asyncHandler(async (req, res) => {
-    const recipe_id = await Saved_Recipes.findById(req.params.id);
-    console.log(recipe_id);
+    const recipe = await Recipes.findById(req.params.id);
+    console.log(recipe);
 
-    if(!recipe_id){
-        res.status(404);
-        throw new Error("Recipe not found");
+    if(!recipe){
+        return res.status(400).json({ error: "Recipe not found !" });
     }
-
-    const recipe = await Recipes.findOne({recipe_id: recipe_id['recipe_id']});
 
     res.status(200).json(recipe);
 });
@@ -61,7 +58,9 @@ const addRecipe = asyncHandler(async (req, res) => {
 //@route DELETE /api/recipes/:id
 //@acess private 
 const deleteRecipe = asyncHandler(async (req, res) => {
-    const recipe = await Saved_Recipes.findById(req.params.id);
+    console.log(req.params.id);
+    const recipe = await Saved_Recipes.findOne({recipe_id: req.params.id});
+    console.log("hello");
 
     if(!recipe){
         res.status(404);
@@ -73,7 +72,7 @@ const deleteRecipe = asyncHandler(async (req, res) => {
         throw new Error("Not authorized to delete this recipe");
     }
 
-    await Saved_Recipes.findByIdAndDelete(req.params.id);
+    await Saved_Recipes.deleteOne({recipe_id:req.params.id});
 
     res.status(201).json(recipe);
 });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './css/Home.css'
+import './css/Home.css';
 
 function Home(){
     const [usercred, setUsercred] = useState('');
@@ -30,35 +30,26 @@ function Home(){
         fetchUser();
     },[]);
 
-    
-
     return (
         <div className="home">
-            <div className = "row mt-5">
-                <div className = "col-md-5 text-center" id="Saved-recipes">
-                    <Link to="/SavedRecipes" className="text-primary">Saved Recipes</Link>
-                </div>
-
-                <div className = "col-md-6" id>
-                    <Link to="/" className="text-primary">logout</Link>
-                </div>
+            <div className="top-right-buttons">
+                <Link to="/SavedRecipes" className="btn btn-outline-primary">Saved Recipes</Link>
+                <Link to="/" className="btn btn-outline-danger">Logout</Link>
             </div>
 
-            <div className = "row mt-2 justify-content-center">
-                <h1 className = "Home-text">
-                    <strong className="first-word">W</strong>elcome {usercred.username} what would you like
-                    to do today
+            <div className="welcome-container">
+                <h1 className="Home-text">
+                    Welcome {usercred.username},
                 </h1>
+                <h2 className="Home-subtext">
+                    See your Saved Recipes down Below
+                </h2>
             </div>
 
-            <div className='row mt-2 justify-content-center'>
-                <div className='col-md-4 text-center'>
-                    <Link to="/FindRecipe" className="btn btn-primary">Find Recipe</Link>
-                </div>
+            <div className="find-recipe-container">
+                <Link to="/FindRecipe" className="btn btn-lg btn-primary find-recipe-btn">Find Recipe</Link>
             </div>
-
         </div>
-
     );
 };
 

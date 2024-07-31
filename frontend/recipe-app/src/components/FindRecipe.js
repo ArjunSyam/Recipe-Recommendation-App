@@ -199,109 +199,107 @@ function FindRecipe(){
 
     return (
         <div className='container mt-3'>
-            <div className='row mt-5 text-center'>
-
+            <div className='row mt-2 text-center'>
             </div>
-
+    
             <div className='row mt-3'>
                 <div className='col-md-6' id="select-options">
                     <div className='form-container'>
-                    <div className='input-box'>
-                    <header>Find a Recipe</header>
-                    <form id="SelectRecipeForm" onSubmit={handleSubmit}>
-                        <div className="input-field">
-                            <select
-                                id="cusineSelect"
-                                className="input"
-                                value={selectedCuisine}
-                                onChange={(e) => setSelectedCuisine(e.target.value)}
-                                required
-                            >
-                                <option value="" disabled>Select a cuisine</option>
-                                {cuisines.map((cuisine, index) => (
-                                    <option key={index} value={cuisine}>{cuisine}</option>
-                                ))}
-                            </select>
+                        <div className='input-box'>
+                            <header>Find a Recipe</header>
+                            <form id="SelectRecipeForm" onSubmit={handleSubmit}>
+                                <div className="input-field">
+                                    <select
+                                        id="cusineSelect"
+                                        className="input"
+                                        value={selectedCuisine}
+                                        onChange={(e) => setSelectedCuisine(e.target.value)}
+                                        required
+                                    >
+                                        <option value="" disabled>Select a cuisine</option>
+                                        {cuisines.map((cuisine, index) => (
+                                            <option key={index} value={cuisine}>{cuisine}</option>
+                                        ))}
+                                    </select>
+                                </div>
+    
+                                <div className="input-field">
+                                    <Select
+                                        isMulti
+                                        id="ingredientSelect"
+                                        required
+                                        options={ingredientOptions}
+                                        onChange={(selectedOptions) => 
+                                            setSelectedIngredients(selectedOptions.map(option => option.value))
+                                        }
+                                        placeholder="Select ingredients"
+                                        className="react-select-container"
+                                        classNamePrefix="react-select"
+                                    />
+                                </div>
+    
+                                <div className="input-field">
+                                    <select
+                                        id="dietSelect"
+                                        className="input"
+                                        value={selectedDiet}
+                                        onChange={(e) => setSelectedDiet(e.target.value)}
+                                        required
+                                    >
+                                        <option value="" disabled>Select a diet</option>
+                                        {diets.map((diet, index) => (
+                                            <option key={index} value={diet}>{diet}</option>
+                                        ))}
+                                    </select>
+                                </div>
+    
+                                <div className="input-field">
+                                    <button type="submit" className="submit">Find Recipe</button>
+                                </div>
+                            </form>
                         </div>
-
-                        <div className="input-field">
-                            <Select
-                                isMulti
-                                id="ingredientSelect"
-                                options={ingredientOptions}
-                                onChange={(selectedOptions) => 
-                                    setSelectedIngredients(selectedOptions.map(option => option.value))
-                                }
-                                placeholder="Select ingredients"
-                                className="react-select-container"
-                                classNamePrefix="react-select"
-                            />
-                        </div>
-
-                        <div className="input-field">
-                            <select
-                                id="dietSelect"
-                                className="input"
-                                value={selectedDiet}
-                                onChange={(e) => setSelectedDiet(e.target.value)}
-                                required
-                            >
-                                <option value="" disabled>Select a diet</option>
-                                {diets.map((diet, index) => (
-                                    <option key={index} value={diet}>{diet}</option>
-                                ))}
-                            </select>
-                        </div>
-
-                        <div className="input-field">
-                            <button type="submit" className="submit">Find Recipe</button>
-                        </div>
-                    </form>
-                </div>
                     </div>
                 </div>
-
-                <div className='col-md-6'>
     
+                <div className='col-md-6' id = "recipe-show">
                     {isLoading ? (
                         <div className="spinner-border text-primary text-center justify-content-center" role="status" />
-                    ) : randomRecipe != {} ?(
-                        <div className='card'>
-                            <button className='save-button' onClick = {SaveRecipe}>
-                                <img src="save.png" alt="Save Recipe" className="save-icon" />
-                            </button>
-                            <div className="row justify-content-center mt-3">
-                                <img src={randomRecipe.image_url} alt={randomRecipe.name} className="img-fluid" />
+                    ) : randomRecipe != {} ? (
+                        <div className="recipe-set row">
+                            <div className='col-1 d-flex align-items-center justify-content-center'>
+                                <button className='next-button prev-button' onClick={recipeChooseBackward}>
+                                    <img src="arrow-left.png" alt="Previous Recipe" className="backward" />
+                                </button>
                             </div>
-
-                            <div className="row justify-content-center mt-3">
-                                <h2>{randomRecipe.name}</h2>
+    
+                            <div className='col-10'>
+                                <div className='card'>
+                                    <img src={randomRecipe.image_url} alt={randomRecipe.name} className="card-img-top" />
+                                    <button className='save-button' onClick={SaveRecipe}>
+                                        <img src="bookmark.png" alt="Save Recipe" className="save-icon" />
+                                    </button>
+    
+                                    <div className="card-body">
+                                        <h2 className="card-title">{randomRecipe.name}</h2>
+                                        <br />
+                                        <h4 className="card-title">{randomRecipe.prep_time}</h4>
+                                        <br />
+                                    </div>
+                                </div>
                             </div>
-
-                            <div className="row justify-content-center mt-3">
-                                <h3>{randomRecipe.description}</h3>
-                                <h4>{randomRecipe.prep_time}</h4>
-                            </div>
-
-                            <div className="row justify-content-center mt-3">
-                                <p>{randomRecipe.ingredients}</p>
+    
+                            <div className='col-1 d-flex align-items-center justify-content-center'>
+                                <button className='next-button next-button-right' onClick={recipeChooseForward}>
+                                    <img src="arrow-right.png" alt="Next Recipe" className="forward" />
+                                </button>
                             </div>
                         </div>
-
-                    ): (
-                        <div className="row mt-3 text-center justify-content-center">
-                            <h1>
-                                No recipes
-                            </h1>
+                    ) : (
+                        <div className="card">
+                            <h1>No recipes</h1>
                         </div>
-                    ) }        
+                    )}        
                 </div>
-
-                <div className='col-md-12 align-content-center'>
-                    <button className='btn btn-primary' onClick = {recipeChooseBackward}>BACK</button>
-                    <button className='btn btn-primary' onClick = {recipeChooseForward}>NEXT</button>
-                </div>
-
             </div>
         </div>
     );
