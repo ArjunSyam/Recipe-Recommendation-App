@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Select from 'react-select';
 import { Link } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
 import axios from 'axios';
 import './css/FindRecipe.css'
 
@@ -12,6 +13,9 @@ function FindRecipe(){
     const [selectedDiet, setSelectedDiet] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     let [index, setindex] = useState(-1);
+    const [alertMessage, setAlertMessage] = useState("");
+    const [alertSeverity, setAlertSeverity] = useState("");
+    const [showAlert, setShowAlert] = useState(false);
 
     const cuisines = useMemo(() => [
     'Andhra', 'Asian', 'Assamese', 'Awadhi', 'Bengali Recipes', 'Bihari', 'Chettinad', 'Continental', 
@@ -112,7 +116,14 @@ function FindRecipe(){
             {
                 console.error('Failed to fetch user data');
             }
-
+            else if(response.data.length == 0)
+            {
+                console.log('No recipes found');
+                setAlertMessage("No Recipe found for given selection");
+                setAlertSeverity("error");
+                setShowAlert(true);
+                setTimeout(() => setShowAlert(false), 3000);
+            }
             else{
                 console.log("hello: ",response.data);
                 const recipes = response.data;
@@ -148,6 +159,13 @@ function FindRecipe(){
             if(response.data.error)
             {
                 console.error('Failed to fetch user data');
+            }
+            else if(randomRecipe != {})
+            {
+                setAlertMessage(`${randomRecipe.name} has been saved`);
+                setAlertSeverity('success');
+                setShowAlert(true);
+                setTimeout(() => setShowAlert(false), 3000);
             }
 
         }catch(error){
@@ -198,7 +216,13 @@ function FindRecipe(){
     
 
     return (
+
         <div className='container mt-3'>
+            {showAlert && (
+                <Alert variant="filled" severity={alertSeverity}>
+                    {alertMessage}
+                </Alert>
+            )}
             <div className='row mt-2 text-center'>
             </div>
     

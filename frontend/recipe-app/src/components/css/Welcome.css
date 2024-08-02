@@ -1,10 +1,6 @@
 @keyframes revealText {
-    0% {
-        width: 100%;
-    }
-    100% {
-        width: 0;
-    }
+    0% { width: 100%; }
+    100% { width: 0; }
 }
 
 @keyframes enterRotateBackground {
@@ -12,9 +8,7 @@
         transform: translateX(-100%) rotate(-45deg);
         opacity: 0;
     }
-    1% {
-        opacity: 1;
-    }
+    1% { opacity: 1; }
     100% {
         transform: translateX(0) rotate(0deg);
         opacity: 1;
@@ -22,7 +16,7 @@
 }
 
 #Welcome-body #Title-text h1 {
-    font-size: 150px;
+    font-size: clamp(3rem, 10vw, 9.375rem);
     color: white;
     justify-content: center;
     display: inline-block;
@@ -73,7 +67,7 @@
 
 .btn {
     color: white;
-    font-size: 20px;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: 500;
 }
 
@@ -86,5 +80,12 @@
 }
 
 strong {
-    font-size: 250px;
+    font-size: clamp(6rem, 15vw, 15.625rem);
+}
+
+@media (max-width: 768px) {
+    #Welcome-body::before {
+        width: 100%;
+        background-position: center;
+    }
 }
