@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './css/Login_Register.css'
+import './css/Login_Register.css';
+import {Helmet} from 'react-helmet';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -36,6 +37,9 @@ function Login() {
 
     return (
         <div className="wrapper">
+            <Helmet>
+                <title>Login</title>
+            </Helmet>
             <div className="container main">
                 <div className = "row">
                     <div className="col-md-6 side-image">

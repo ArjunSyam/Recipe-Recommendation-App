@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Select from 'react-select';
-import { Link } from 'react-router-dom';
+import {Helmet} from 'react-helmet';
 import Alert from '@mui/material/Alert';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -228,6 +228,9 @@ function FindRecipe(){
     return (
 
         <div className='container mt-3'>
+            <Helmet>
+                <title>Find Recipe</title>
+            </Helmet>
             {showAlert && (
                 <Alert variant="filled" severity={alertSeverity}>
                     {alertMessage}

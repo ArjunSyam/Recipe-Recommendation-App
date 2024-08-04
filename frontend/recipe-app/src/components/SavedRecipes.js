@@ -4,6 +4,7 @@ import { Link,useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import './css/SavedRecipes.css';    
+import {Helmet} from 'react-helmet';
 
 const SavedRecipes = () => {
     const [savedRecipes, setSavedRecipes] = useState([]);
@@ -106,6 +107,9 @@ const SavedRecipes = () => {
 
     return (
         <div className="container">
+            <Helmet>
+                <title>Home</title>
+            </Helmet>
             <div className="container mt-3" id = "Welcome-body">
                 <div className="home">
                     <div className="top-right-button">

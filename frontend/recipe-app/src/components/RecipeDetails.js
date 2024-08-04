@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './css/RecipeDetails.css';
+import {Helmet} from 'react-helmet';
 
 function RecipeDetails(){
     const [recipe, setRecipe] = useState({});
@@ -45,6 +46,9 @@ function RecipeDetails(){
 
     return(
         <div>
+            <Helmet>
+                <title>{recipe.name}</title>
+            </Helmet>
         {isLoading ? (
             <div className="spinner-border" role="status" />
         ) : recipe && Object.keys(recipe).length > 0 ? (
