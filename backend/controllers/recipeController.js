@@ -21,13 +21,23 @@ const recipePrompt = asyncHandler(async (req, res) => {
         and_objects.push({diet:diet})
     }
 
-    if(ingredients != [])
+    if(ingredients.length != 0)
     {
         and_objects.push({$and:ingredients.map(ingredient=>({ingredients:{$regex:new RegExp(ingredient,"i")}}))})
     }
 
     const query = {$and:and_objects};
-    const possibleRecipes = await Recipes.find(query);
+    console.log(query);
+    let possibleRecipes;
+
+    if(and_objects.length == 0)
+    {
+        console.log("random");
+        possibleRecipes = await Recipes.aggregate([{ $sample: { size: 1 } }]);
+    }
+    else{
+        possibleRecipes = await Recipes.find(query);
+    }
 
     res.status(201).json(possibleRecipes);
 });

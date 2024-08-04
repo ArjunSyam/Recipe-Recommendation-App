@@ -3,6 +3,8 @@ import Select from 'react-select';
 import { Link } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import './css/FindRecipe.css'
 
 function FindRecipe(){
@@ -16,6 +18,7 @@ function FindRecipe(){
     const [alertMessage, setAlertMessage] = useState("");
     const [alertSeverity, setAlertSeverity] = useState("");
     const [showAlert, setShowAlert] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(true);
 
     const cuisines = useMemo(() => [
     'Andhra', 'Asian', 'Assamese', 'Awadhi', 'Bengali Recipes', 'Bihari', 'Chettinad', 'Continental', 
@@ -115,6 +118,7 @@ function FindRecipe(){
             if(response.data.error)
             {
                 console.error('Failed to fetch user data');
+                setIsDisabled(true);
             }
             else if(response.data.length == 0)
             {
@@ -123,12 +127,14 @@ function FindRecipe(){
                 setAlertSeverity("error");
                 setShowAlert(true);
                 setTimeout(() => setShowAlert(false), 3000);
+                setIsDisabled(true);
             }
             else{
                 console.log("hello: ",response.data);
                 const recipes = response.data;
                 selectedRecipes = recipes;
                 setSelectedRecipes(recipes);
+                setIsDisabled(false);
             }
 
         }catch(error){
@@ -212,6 +218,10 @@ function FindRecipe(){
         console.log(index);
     
     }
+
+    const handleShowMore = (id) => {
+        window.open(`/recipe/${id}`, '_blank');
+    };
                 
     
 
@@ -238,7 +248,6 @@ function FindRecipe(){
                                         className="input"
                                         value={selectedCuisine}
                                         onChange={(e) => setSelectedCuisine(e.target.value)}
-                                        required
                                     >
                                         <option value="" disabled>Select a cuisine</option>
                                         {cuisines.map((cuisine, index) => (
@@ -251,7 +260,6 @@ function FindRecipe(){
                                     <Select
                                         isMulti
                                         id="ingredientSelect"
-                                        required
                                         options={ingredientOptions}
                                         onChange={(selectedOptions) => 
                                             setSelectedIngredients(selectedOptions.map(option => option.value))
@@ -268,7 +276,6 @@ function FindRecipe(){
                                         className="input"
                                         value={selectedDiet}
                                         onChange={(e) => setSelectedDiet(e.target.value)}
-                                        required
                                     >
                                         <option value="" disabled>Select a diet</option>
                                         {diets.map((diet, index) => (
@@ -291,7 +298,7 @@ function FindRecipe(){
                     ) : randomRecipe != {} ? (
                         <div className="recipe-set row">
                             <div className='col-1 d-flex align-items-center justify-content-center'>
-                                <button className='next-button prev-button' onClick={recipeChooseBackward}>
+                                <button className='next-button prev-button' onClick={recipeChooseBackward} disabled = {isDisabled}>
                                     <img src="arrow-left.png" alt="Previous Recipe" className="backward" />
                                 </button>
                             </div>
@@ -299,7 +306,7 @@ function FindRecipe(){
                             <div className='col-10'>
                                 <div className='card'>
                                     <img src={randomRecipe.image_url} alt={randomRecipe.name} className="card-img-top" />
-                                    <button className='save-button' onClick={SaveRecipe}>
+                                    <button className='save-button' onClick={SaveRecipe} disabled = {isDisabled}>
                                         <img src="bookmark.png" alt="Save Recipe" className="save-icon" />
                                     </button>
     
@@ -309,11 +316,17 @@ function FindRecipe(){
                                         <h4 className="card-title">{randomRecipe.prep_time}</h4>
                                         <br />
                                     </div>
+
+                                    <button onClick={() => handleShowMore(randomRecipe._id)} className="icon-button show-more-button">
+                                    <FontAwesomeIcon icon={faInfoCircle} /> Show More
+                                    </button>
+
+                                    <br></br>
                                 </div>
                             </div>
     
                             <div className='col-1 d-flex align-items-center justify-content-center'>
-                                <button className='next-button next-button-right' onClick={recipeChooseForward}>
+                                <button className='next-button next-button-right' onClick={recipeChooseForward} disabled = {isDisabled}>
                                     <img src="arrow-right.png" alt="Next Recipe" className="forward" />
                                 </button>
                             </div>
