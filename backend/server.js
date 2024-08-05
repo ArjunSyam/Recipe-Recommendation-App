@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "https://recipe-app-1djy.onrender.com",
     credentials: true
 }))
 
