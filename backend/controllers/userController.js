@@ -103,6 +103,7 @@ const loginUser = asyncHandler(async (req, res) => {
     //compare password with hashed password
 
     if(await bcrypt.compare(password, user.password)){
+        console.log("Login Successful");
         const accessToken = jwt.sign(
             {
                 user: {

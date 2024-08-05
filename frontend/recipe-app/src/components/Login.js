@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './css/Login_Register.css';
 import {Helmet} from 'react-helmet';
@@ -8,6 +8,7 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         console.log(username,password)
@@ -28,7 +29,7 @@ function Login() {
                 console.log('Login Successful');
                 console.log(response.data.accessToken);
                 localStorage.setItem('token',response.data.accessToken)
-                window.location.href = '/SavedRecipes';
+                navigate('/SavedRecipes');
             }
         } catch (error) {
             setError(error.message);
