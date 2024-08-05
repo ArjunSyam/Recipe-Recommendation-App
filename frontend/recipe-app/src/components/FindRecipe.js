@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Select from 'react-select';
 import {Helmet} from 'react-helmet';
+import {Link, useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,6 +20,7 @@ function FindRecipe(){
     const [alertSeverity, setAlertSeverity] = useState("");
     const [showAlert, setShowAlert] = useState(false);
     const [isDisabled, setIsDisabled] = useState(true);
+    const navigate = useNavigate();
 
     const cuisines = useMemo(() => [
     'Andhra', 'Asian', 'Assamese', 'Awadhi', 'Bengali Recipes', 'Bihari', 'Chettinad', 'Continental', 
@@ -220,7 +222,7 @@ function FindRecipe(){
     }
 
     const handleShowMore = (id) => {
-        window.open(`/recipe/${id}`, '_blank');
+        navigate(`/recipe/${id}`, '_blank', 'noopener');
     };
                 
     

@@ -97,7 +97,7 @@ const SavedRecipes = () => {
     };
 
     const handleShowMore = (id) => {
-        window.open(`/recipe/${id}`, '_blank');
+        navigate(`/recipe/${id}`, '_blank', 'noopener');
     };
 
     const logout = () => {
