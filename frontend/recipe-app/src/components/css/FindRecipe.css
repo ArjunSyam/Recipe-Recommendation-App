@@ -23,6 +23,9 @@ align-items: center;
     border:none;
     margin: 0 auto;
     min-height: 80vh;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
     display: flex;
     position: relative;
     justify-content: center;
@@ -53,6 +56,10 @@ align-items: center;
     height: 300px;
     border: none;
     border-color: white;
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
 }
 
 .next-button {
@@ -128,3 +135,14 @@ width: 35px;
     outline: none;
 }
 
+@media (max-width: 768px) {
+    .card {
+        min-height: auto;
+        padding: 15px;
+    }
+    
+    .save-icon {
+        top: 15px;
+        right: 15px;
+    }
+}

@@ -15,7 +15,7 @@ function RecipeDetails(){
                 const id = pathParts[pathParts.length - 1];
                 console.log("hello",id);
                 const token = localStorage.getItem('token');
-                const response = await axios.get(`http://localhost:5001/api/recipes/${id}`,
+                const response = await axios.get(`https://recipe-api.onrender.com/api/recipes/${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`

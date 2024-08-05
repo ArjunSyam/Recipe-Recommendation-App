@@ -14,7 +14,7 @@ function Login() {
         console.log(username,email,password)
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5001/api/users/register', 
+            const response = await axios.post('https://recipe-api.onrender.com/api/users/register', 
                 {username,email, password },
                 {
                     headers: { 'Content-Type': 'application/json' },
@@ -64,7 +64,7 @@ function Login() {
 
                             <div className="input-field">
                                 <input
-                                    type="text"
+                                    type="email"
                                     id="loginEmail"
                                     className="input"
                                     required
