@@ -103,7 +103,7 @@ function FindRecipe(){
         setIsLoading(true);
         try{
             const token = localStorage.getItem('token');
-            const response = await axios.post('https://recipe-api.onrender.com/api/recipeGenerate',
+            const response = await axios.post('https://recipe-api-9ocv.onrender.com/api/recipeGenerate',
                 { 
                     "cuisine": selectedCuisine,
                     "diet": selectedDiet,
@@ -152,7 +152,7 @@ function FindRecipe(){
         try{
             const token = localStorage.getItem('token');
             const response = await axios.post(
-                'https://recipe-api.onrender.com/api/recipes',
+                'https://recipe-api-9ocv.onrender.com/api/recipes',
                 {
                     "recipe_id" : randomRecipe.recipe_id
                 },
