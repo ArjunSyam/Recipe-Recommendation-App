@@ -13,7 +13,7 @@ function Login() {
         console.log(username,password)
         event.preventDefault();
         try {
-            const response = await axios.post('https://recipe-api.onrender.com/api/users/login', 
+            const response = await axios.post('https://recipe-api-9ocv.onrender.com/api/users/login', 
                 {email: username, password },
                 {
                     headers: { 'Content-Type': 'application/json' },

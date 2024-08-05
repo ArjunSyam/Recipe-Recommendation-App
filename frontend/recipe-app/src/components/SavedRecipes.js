@@ -16,7 +16,7 @@ const SavedRecipes = () => {
         setIsLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('https://recipe-api.onrender.com/api/recipes', {
+            const response = await axios.get('https://recipe-api-9ocv.onrender.com/api/recipes', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -40,7 +40,7 @@ const SavedRecipes = () => {
         const fetchUser = async () =>{
             try{
                 const token = localStorage.getItem('token');
-                const response = await axios.get('https://recipe-api.onrender.com/api/users/current',{
+                const response = await axios.get('https://recipe-api-9ocv.onrender.com/api/users/current',{
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -69,7 +69,7 @@ const SavedRecipes = () => {
                 try{
                     console.log(id);
                     const token = localStorage.getItem('token');
-                    const response = await axios.delete(`https://recipe-api.onrender.com/api/recipes/${id}`,
+                    const response = await axios.delete(`https://recipe-api-9ocv.onrender.com/api/recipes/${id}`,
                         {
                             headers: {
                                 Authorization: `Bearer ${token}`
